@@ -60,7 +60,9 @@ ALIASES = {
 PUNCTUATION = {"period": [".", "/", "\\", "|"],
                "exclamation": ["!"],
                # a dingbat, no Latin counterpart: the asterisk is the nearest star
-               "comet": ["*"]}
+               "comet": ["*"],
+               # not in the manuscripts: Mitia's own addition, version 2.1
+               "question": ["?"]}
 
 # Letters typed two ways.  Ndyuka texts write the glide either y (current
 # orthography) or j (the older, Dutch-based one): ja, tja, djo, nja.  A typed

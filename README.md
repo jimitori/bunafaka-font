@@ -35,7 +35,7 @@ source/*.svg → ./scripts/build.sh → dist/{otf,ttf,woff2}/BunAfaka-Regular.*
 
 ## Знаки препинания
 
-Все три знака Афаки нарисованы. Файлы названы словами, а не символами, потому что `.svg` был бы
+Все три знака Афаки нарисованы, плюс вопросительный знак. Файлы названы словами, а не символами, потому что `.svg` был бы
 скрытым файлом. Какой символ какой знак набирает, задаёт `PUNCTUATION` в `scripts/model.py`.
 
 | Знак | Файл | Набор |
@@ -43,6 +43,7 @@ source/*.svg → ./scripts/build.sh → dist/{otf,ttf,woff2}/BunAfaka-Regular.*
 | точка (длинная вертикальная черта) | `period.svg` | `.` `/` `\` `\|` |
 | восклицание (столбик колечек) | `exclamation.svg` | `!` |
 | комета Галлея | `comet.svg` | `*` |
+| вопросительный знак — в рукописях его нет, добавлен в 2.1 | `question.svg` | `?` |
 
 Источник: M. Everson, *Proposal for encoding the Afáka script in the SMP of the UCS*,
 WG2 N4132R (2011).

@@ -173,6 +173,7 @@ def compile_font(spec: FontSpec, kind: str, order, pens, metrics, fea: str):
     is_ttf = kind == "ttf"
     grid, vert = spec.grid, spec.vertical
     fb = FontBuilder(grid.upm, isTTF=is_ttf)
+    fb.updateHead(fontRevision=float(spec.version))
     fb.setupGlyphOrder(order)
     fb.setupCharacterMap(spec.cmap)
 

@@ -120,7 +120,7 @@ def main():
 
     spec = FontSpec(
         family="Bun Afaka",
-        version="2.000",
+        version="2.100",
         designer="Mitia Morovov-Sheiner",
         description="Afaka syllabary for Ndyuka. Type Ndyuka in Latin, "
                     "get Afaka.",
