@@ -29,6 +29,7 @@ source/*.svg → ./scripts/build.sh → dist/{otf,ttf,woff2}/BunAfaka-Regular.*
 | конечные n, m не пишутся | `kon`, `kom` → KO; но `kona` → KO NA |
 | преназализованные = простые | `mba` → BA, `nda` → DA, `anga` → A GA |
 | долгие гласные повторяются | `koo` → KO O |
+| глайд пишут и *y*, и *j* (старая голландская орфография) | `ja` → YA, `tja` → TYA, `djo` → DYO, `nja` → NYA |
 
 Регистр не важен. Проверки — `scripts/check_shaping.py`.
 

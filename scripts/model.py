@@ -57,6 +57,11 @@ ALIASES = {
 # semicolon.
 PUNCTUATION = {"period": "."}
 
+# Letters typed two ways.  Ndyuka texts write the glide either y (current
+# orthography) or j (the older, Dutch-based one): ja, tja, djo, nja.  A typed
+# j behaves exactly like y; with no j.svg drawn it also shows the y letter.
+LETTER_ALIASES = {"j": "y"}
+
 # Prenasalised onsets written with the plain sign.
 PRENASAL = {"b": ["mb"], "d": ["nd"], "g": ["ng"]}
 
@@ -91,6 +96,9 @@ class Sign:
         readings = list(self.readings)
         for r in self.readings:
             readings += [a for a in ALIASES.get(r, []) if a not in taken]
+        for alt, letter in LETTER_ALIASES.items():
+            readings += [r.replace(letter, alt) for r in readings
+                         if letter in r]
         out = []
         for r in dict.fromkeys(readings):
             heads = [r] + [p + r[1:] for p in PRENASAL.get(r[0], [])]

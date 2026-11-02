@@ -43,6 +43,13 @@ CASES = [
     ("to", ["af_to"]), ("ti", ["af_ti"]), ("nya", ["af_nya"]),
     ("ni", ["af_ni"]), ("ye", ["af_ye"]), ("ani", ["af_a", "af_ni"]),
     ("koti.", ["af_ko", "af_ti", "af_period"]),
+    # j is typed like y (older Dutch-based Ndyuka spelling)
+    ("ja", ["af_ya"]), ("ju", ["af_yu"]), ("je", ["af_ye"]),
+    ("JA", ["af_ya"]), ("tja", ["af_tya"]), ("djo", ["af_dyo"]),
+    ("dju", ["af_dyo"]), ("nja", ["af_nya"]), ("j", ["lat_y"]),
+    # n before ya opens NYA rather than falling silent
+    ("anya", ["af_a", "af_nya"]), ("konya", ["af_ko", "af_nya"]),
+    ("anja", ["af_a", "af_nya"]), ("konyu", ["af_ko", "af_yu"]),
     # three-letter syllable
     ("tya", ["af_tya"]),
     # a consonant with no syllable falls back to the hand-drawn letter

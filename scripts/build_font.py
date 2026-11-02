@@ -38,6 +38,8 @@ SIDE = 70
 
 SPACE = 320
 CLONE = ".on"       # an n or m that opens the next syllable, see context_rules
+# after n or m, everything except a vowel or a glide (nya) closes the syllable
+CONSONANTS_NOT_GLIDE = set(model.CONSONANTS) - {"y"}
 
 
 def flatten(stem):
@@ -83,6 +85,10 @@ def main():
         elif s.kind == "punct":
             char_glyph[model.PUNCTUATION[s.stem]] = s.name
 
+    for alt, letter in model.LETTER_ALIASES.items():
+        if alt not in char_glyph and letter in char_glyph:
+            char_glyph[alt] = char_glyph[letter]
+
     taken = {r for s in signs for r in s.readings}
     glyphs = [Glyph("space", advance=SPACE)]
     skipped = []
@@ -98,8 +104,10 @@ def main():
                 continue
             seq = [char_glyph[ch] for ch in typed]
             inputs.append(seq)
-            if typed[0] in model.SILENT_CODA and typed[1] in model.VOWELS:
+            if typed[0] in model.SILENT_CODA and typed[1] not in CONSONANTS_NOT_GLIDE:
                 inputs.append([seq[0] + CLONE] + seq[1:])
+        # j and y can land on one glyph, so two spellings can become one
+        inputs = [list(t) for t in dict.fromkeys(map(tuple, inputs))]
         glyphs.append(fitted(s.name, svg, inputs))
         if s.kind == "letter" and s.stem in model.SILENT_CODA:
             glyphs.append(fitted(s.name + CLONE, svg))
@@ -150,18 +158,28 @@ def main():
 
 
 def context_rules(char_glyph):
-    """An n or m before a vowel opens the next syllable.
+    """An n or m that begins a syllable is not a silent coda.
 
     Without this, greedy longest-match reads "kona" as KON + A, since a coda
     n is silent and KON is a ligature.  Swapping such an n for a clone that
-    the coda ligatures do not list forces KO + NA.
+    the coda ligatures do not list forces KO + NA.  Same for "konya": NYA
+    begins at the n, so A YA would be wrong.
     """
     heads = [char_glyph[c] for c in model.SILENT_CODA if c in char_glyph]
     vowels = [char_glyph[v] for v in model.VOWELS if v in char_glyph]
-    return [ContextRule(
+    rules = [ContextRule(
         input=[heads], lookahead=[vowels],
         replace={g: g + CLONE for g in heads},
         comment="n/m before a vowel is an onset, not a silent coda.")]
+    glide = sorted({char_glyph[c] for c in ["y", *model.LETTER_ALIASES]
+                    if c in char_glyph})
+    # only nya exists; before yu, yo ... the n is a coda again (konyu: KO YU)
+    if glide and "a" in char_glyph:
+        rules.append(ContextRule(
+            input=[heads], lookahead=[glide, [char_glyph["a"]]],
+            replace={g: g + CLONE for g in heads},
+            comment="n/m before y/j + vowel opens a syllable (nya)."))
+    return rules
 
 
 if __name__ == "__main__":
