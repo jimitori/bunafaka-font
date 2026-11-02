@@ -43,7 +43,8 @@ CONSONANTS = "bdfgklmnpstwy"
 # Script-level aliases: one sign, several readings (Everson 2011, section 1
 # and the character annotations).  Applied only when the file itself does not
 # already name the reading -- a drawing called se.svg and another called
-# si.svg stay two signs.
+# si.svg stay two signs.  That one is deliberate: the manuscripts vary a lot,
+# and separate se/si is the first step towards variant forms of signs.
 ALIASES = {
     "bo": ["bu"], "fo": ["fu"], "lo": ["lu"], "go": ["gu"], "do": ["du"],
     "mo": ["mu"], "no": ["nu"], "so": ["su"], "dyo": ["dyu"],
