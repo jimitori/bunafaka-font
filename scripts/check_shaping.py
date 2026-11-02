@@ -43,6 +43,9 @@ CASES = [
     ("to", ["af_to"]), ("ti", ["af_ti"]), ("nya", ["af_nya"]),
     ("ni", ["af_ni"]), ("ye", ["af_ye"]), ("ani", ["af_a", "af_ni"]),
     ("koti.", ["af_ko", "af_ti", "af_period"]),
+    ("koti/", ["af_ko", "af_ti", "af_period"]),
+    ("koti\\", ["af_ko", "af_ti", "af_period"]),
+    ("koti|", ["af_ko", "af_ti", "af_period"]),
     # j is typed like y (older Dutch-based Ndyuka spelling)
     ("ja", ["af_ya"]), ("ju", ["af_yu"]), ("je", ["af_ye"]),
     ("JA", ["af_ya"]), ("tja", ["af_tya"]), ("djo", ["af_dyo"]),

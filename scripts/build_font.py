@@ -83,7 +83,8 @@ def main():
         elif s.kind == "vowel":
             char_glyph[s.readings[0]] = s.name
         elif s.kind == "punct":
-            char_glyph[model.PUNCTUATION[s.stem]] = s.name
+            for ch in model.PUNCTUATION[s.stem]:
+                char_glyph[ch] = s.name
 
     for alt, letter in model.LETTER_ALIASES.items():
         if alt not in char_glyph and letter in char_glyph:

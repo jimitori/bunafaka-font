@@ -51,11 +51,12 @@ ALIASES = {
     "ba": ["pa"],
 }
 
-# Punctuation: file name -> the character typed for it.  A file cannot be
+# Punctuation: file name -> the characters typed for it.  Transcriptions
+# write the Afaka full stop as . / \ or |, so all four give the bar.  A file cannot be
 # called ".svg" (it would be hidden), so the names are words.  Afaka has three
 # marks (Everson 2011, section 7); the full stop also does duty as a
 # semicolon.
-PUNCTUATION = {"period": "."}
+PUNCTUATION = {"period": [".", "/", "\\", "|"]}
 
 # Letters typed two ways.  Ndyuka texts write the glide either y (current
 # orthography) or j (the older, Dutch-based one): ja, tja, djo, nja.  A typed
@@ -92,7 +93,7 @@ class Sign:
         if self.kind == "letter":
             return [self.stem]
         if self.kind == "punct":
-            return [PUNCTUATION[self.stem]]
+            return list(PUNCTUATION[self.stem])
         readings = list(self.readings)
         for r in self.readings:
             readings += [a for a in ALIASES.get(r, []) if a not in taken]
